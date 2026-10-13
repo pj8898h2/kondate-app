@@ -79,7 +79,7 @@ flowchart TB
 | 2026-10-13 | 「次の日曜日」は、今日が日曜なら今日を開始日にする | 計画作成時の判断。理由は計画に無く未確認 | AI(計画作成時)→本人が了承(2026-10-13) | [plan Task 2 Step 9] [plan Self-Review メモ] | 未(Task 2 Step 9 で反映予定) |
 | 2026-10-13 | 今週の画面の表示範囲を「今日から7日分」から「2日前から6日後まで」に変えた | 評価し忘れた分も付けられるように | AI(計画作成時)→本人が了承(2026-10-13) | [plan Task 9 Step 6] [plan Self-Review メモ] | 未(Task 9 Step 6) |
 | 2026-10-13 | アクセス制限は `middleware.ts` ではなく `src/proxy.ts` にする | Next.js 16 で middleware が非推奨のため | AI(計画作成時) | [plan Global Constraints] [台帳: Ruling 5] | 済(spec §4、2026-10-13) |
-| 2026-10-13 | DB 接続エラー用の `error.tsx` は作らず、Next.js 既定のエラー画面に任せる | 計画作成時の判断。理由は未確認 | AI(計画作成時) | [plan Self-Review メモ] | 未(反映する手順が計画に無い。spec §8 は error boundary で再読み込みを促す、のまま) |
+| 2026-10-13 | DB 接続エラーのとき、再読み込みを促す画面(`error.tsx`)を作る(計画では作らない予定だった) | 仕様書 §8 のとおりにする。スマホで英語のエラーが出るより分かりやすい | 本人 | [台帳: 本人の決定] [plan Task 7 Step 5b] | 済(spec §8 のまま。計画側を直した) |
 | 2026-10-13 | Ruling 1: 各 Task の PR を人間がマージするまで次の Task に進まない | 計画の Global Constraint(人間が main にマージする)を、連続実行より優先 | コントローラー(AI) | [台帳: Ruling 1] | 対象外 |
 | 2026-10-13 | Ruling 2: git worktree は使わず、Task ごとのブランチで作業する | 計画が `task/<N>-<slug>` ブランチを指定しており、一人用のリポジトリでは足りる | コントローラー(AI) | [台帳: Ruling 2] | 対象外 |
 | 2026-10-13 | Ruling 3: Task 0(GitHub の Issue 作成)は実装者・レビュアーを使わず直接実行 | コードもレビュー対象も無いため | コントローラー(AI) | [台帳: Ruling 3] | 対象外 |
