@@ -73,7 +73,7 @@ gh api repos/pj8898h2/kondate-app/milestones -f title="Slice 1" -f due_on="2026-
 gh api repos/pj8898h2/kondate-app/milestones -f title="Slice 2" -f description="DevDay(1月下旬)まで"
 ```
 
-- [ ] **Step 2: Slice 1 の Issue を Task 1〜10 の順に作る**(Issue 番号は PR #1 の次から振られるので、Task N = Issue #(N+1) になる)
+- [ ] **Step 2: Slice 1 の Issue を Task 1〜10 の順に作る**(Issue 番号は PR #1・#2 の次から振られるので、Task N = Issue #(N+2) になる)
 
 ```bash
 for t in \
@@ -103,11 +103,11 @@ done
 - [ ] **Step 4: 番号を確認する**
 
 Run: `gh issue list --repo pj8898h2/kondate-app --milestone "Slice 1" --json number,title --jq '.[] | "\(.number) \(.title)"'`
-Expected: `2 Task 1: ...` から `11 Task 10: ...` まで。ずれていたら、以降の `Closes #` を実際の番号に読み替える
+Expected: `3 Task 1: ...` から `12 Task 10: ...` まで。ずれていたら、以降の `Closes #` を実際の番号に読み替える
 
 ---
 
-### Task 1: Next.js の雛形・Vitest・CI(Issue #2)
+### Task 1: Next.js の雛形・Vitest・CI(Issue #3)
 
 **Files:**
 - Create: Next.js の雛形一式(`create-next-app` が生成)
@@ -227,7 +227,7 @@ jobs:
 git add -A
 git commit -m "chore: scaffold Next.js 16 with Vitest and CI" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push -u origin task/1-scaffold
-gh pr create --fill --body "Closes #2
+gh pr create --fill --body "Closes #3
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 ```
@@ -236,7 +236,7 @@ Expected: PR の CI(check)が緑になる
 
 ---
 
-### Task 2: 日付ユーティリティと点数関数(Issue #3)
+### Task 2: 日付ユーティリティと点数関数(Issue #4)
 
 **Files:**
 - Create: `src/domain/menu/types.ts`, `src/domain/menu/weights.ts`, `src/domain/menu/dates.ts`, `src/domain/menu/score.ts`
@@ -512,14 +512,14 @@ Expected: 成功
 git add -A
 git commit -m "feat(domain): add date utils and dish scoring" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push -u origin task/2-score
-gh pr create --fill --body "Closes #3
+gh pr create --fill --body "Closes #4
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 ```
 
 ---
 
-### Task 3: 献立生成と差し替え(Issue #4)
+### Task 3: 献立生成と差し替え(Issue #5)
 
 **Files:**
 - Create: `src/domain/menu/generate.ts`, `src/domain/menu/options.ts`
@@ -741,14 +741,14 @@ Expected: 成功
 git add -A
 git commit -m "feat(domain): add generateMenu and rerollDay" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push -u origin task/3-generate
-gh pr create --fill --body "Closes #4
+gh pr create --fill --body "Closes #5
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 ```
 
 ---
 
-### Task 4: 料理の統計・入力チェック・CSV 読み込み(Issue #5)
+### Task 4: 料理の統計・入力チェック・CSV 読み込み(Issue #6)
 
 **Files:**
 - Create: `src/domain/dish-stats.ts`, `src/domain/dish-input.ts`, `src/domain/seed-csv.ts`, `seed/sample.csv`
@@ -1031,14 +1031,14 @@ Expected: 成功
 git add -A
 git commit -m "feat(domain): add dish stats, input schema and seed CSV parser" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push -u origin task/4-dish-domain
-gh pr create --fill --body "Closes #5
+gh pr create --fill --body "Closes #6
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 ```
 
 ---
 
-### Task 5: DB スキーマと接続・リポジトリ層(Issue #6)
+### Task 5: DB スキーマと接続・リポジトリ層(Issue #7)
 
 **Files:**
 - Create: `src/db/schema.ts`, `src/db/client.ts`, `src/db/repo.ts`, `drizzle.config.ts`, `.env.example`, `drizzle/`(生成物)
@@ -1298,14 +1298,14 @@ git status --short   # .env.local が出ていないこと
 git add -A
 git commit -m "feat(db): add Drizzle schema, migration and repository layer" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push -u origin task/5-db
-gh pr create --fill --body "Closes #6
+gh pr create --fill --body "Closes #7
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 ```
 
 ---
 
-### Task 6: パスワード認証(Issue #7)
+### Task 6: パスワード認証(Issue #8)
 
 **Files:**
 - Create: `src/lib/auth.ts`, `src/lib/require-auth.ts`, `src/proxy.ts`, `src/app/login/page.tsx`, `src/app/login/login-form.tsx`, `src/app/login/actions.ts`
@@ -1497,14 +1497,14 @@ npm test && npm run lint && npm run typecheck
 git add -A
 git commit -m "feat(auth): add single-password login with proxy" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push -u origin task/6-auth
-gh pr create --fill --body "Closes #7
+gh pr create --fill --body "Closes #8
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 ```
 
 ---
 
-### Task 7: 料理画面と初期データの一括投入(Issue #8)
+### Task 7: 料理画面と初期データの一括投入(Issue #9)
 
 **Files:**
 - Create: `src/app/dishes/page.tsx`, `src/app/dishes/new/page.tsx`, `src/app/dishes/[id]/page.tsx`, `src/app/dishes/dish-form.tsx`, `src/app/dishes/actions.ts`, `scripts/seed.ts`
@@ -1764,14 +1764,14 @@ git status --short   # seed/dishes.csv が出ていないこと
 git add -A
 git commit -m "feat(dishes): add dish list/form and seed script" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push -u origin task/7-dishes
-gh pr create --fill --body "Closes #8
+gh pr create --fill --body "Closes #9
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 ```
 
 ---
 
-### Task 8: 献立を作る画面(Issue #9)
+### Task 8: 献立を作る画面(Issue #10)
 
 **Files:**
 - Create: `src/app/plan/page.tsx`, `src/app/plan/plan-builder.tsx`, `src/app/plan/actions.ts`
@@ -1973,14 +1973,14 @@ npm test && npm run lint && npm run typecheck
 git add -A
 git commit -m "feat(plan): add menu planning screen" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push -u origin task/8-plan
-gh pr create --fill --body "Closes #9
+gh pr create --fill --body "Closes #10
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 ```
 
 ---
 
-### Task 9: 今週の画面(評価・差し替え)(Issue #10)
+### Task 9: 今週の画面(評価・差し替え)(Issue #11)
 
 **Files:**
 - Modify: `src/app/page.tsx`(雛形を置き換える), `docs/superpowers/specs/2026-10-12-kondate-mvp-design.md`(§7)
@@ -2116,14 +2116,14 @@ npm test && npm run lint && npm run typecheck
 git add -A
 git commit -m "feat(week): add weekly view with rating and dish swap" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push -u origin task/9-week
-gh pr create --fill --body "Closes #10
+gh pr create --fill --body "Closes #11
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 ```
 
 ---
 
-### Task 10: PWA 化と本番公開・受け入れ確認(Issue #11)
+### Task 10: PWA 化と本番公開・受け入れ確認(Issue #12)
 
 **Files:**
 - Create: `src/app/manifest.ts`, `src/app/apple-icon.tsx`
@@ -2187,7 +2187,7 @@ npm test && npm run lint && npm run typecheck
 git add -A
 git commit -m "feat(pwa): add manifest and apple icon" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push -u origin task/10-pwa
-gh pr create --fill --body "Closes #11
+gh pr create --fill --body "Closes #12
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 ```
@@ -2209,10 +2209,34 @@ Expected: Task 10 の PR に Vercel のプレビュー URL が付き、そこで
 
 `c:\Users\pj889\Mynotes\projects\private\kondate-app.md` に本番 URL と Slice 1 の完了日を追記する
 
+- [ ] **Step 8: 🧑 成功の基準を週に1回確かめる**(spec §1。本番で使い始めた週から、4週続ける)
+
+Supabase の SQL Editor で、次の SQL を流す(週1回、献立を確定するときでよい):
+
+```sql
+-- 週ごとの「確定した日数」と「評価が付いた日数」
+select date_trunc('week', date)::date as week,
+       count(*) as planned,
+       count(taste) as rated,
+       round(100.0 * count(taste) / count(*)) as rated_pct
+from meals
+where date <= current_date
+group by 1 order by 1;
+```
+
+判定:
+- 成功の基準1「4週続けてアプリで献立を決めた」→ `week` の行が、抜けなく4行続いている
+- 成功の基準2「確定した夕食の7割以上に評価が付いた」→ 4週分の `rated_pct` がどれも 70 以上
+
+あわせて、献立を確定するときに「別のにする」を押した回数を、紙のノートに数字で書いておく(献立の質の目安。Slice 1 ではアプリに記録しない)
+
+4週たったら、結果を vault の `projects/private/kondate-app.md` に書き、Slice 2 の優先順位を決める材料にする
+
 ---
 
 ## Self-Review メモ(計画作成時に確認済み)
 
 - spec のカバー範囲(§3 Slice 1): 料理の登録・編集・一覧 = Task 7 / 一括投入 = Task 4・7 / 献立生成 = Task 2・3・8 / 差し替え・確定 = Task 3・8 / 評価 = Task 9 / パスワード = Task 6 / 公開・CI・PWA = Task 1・10
 - §8 エラー処理: 入力チェック = Task 4・7 / パスワード違い = Task 6 / 料理が足りない = Task 3・8。DB 接続エラーは Next.js 既定のエラー画面に任せる(専用の `error.tsx` は作らない)
+- §1 成功の基準: 測り方 = Task 10 Step 8(2026-10-13 に追加。当初の計画では漏れていた)
 - spec からの変更点(Task 2 Step 9 と Task 9 Step 6 で spec に反映する): `dishes.baseTaste` の追加 / `rerollDay` の `skip` / 「次の日曜日」は今日が日曜なら今日 / 今週の表示は2日前から
