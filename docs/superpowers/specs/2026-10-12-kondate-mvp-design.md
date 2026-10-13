@@ -61,7 +61,7 @@ src/
   domain/menu/     献立生成の純粋関数(UI と DB に依存しない)
   db/              Drizzle のスキーマとリポジトリ層(DB アクセスはここに閉じ込める)
   app/             画面と Server Actions
-  middleware.ts    パスワードによるアクセス制限
+  proxy.ts         パスワードによるアクセス制限(Next.js 16 で middleware から改名)
 scripts/seed.ts    初期データの一括投入
 seed/              投入するデータ(sample.csv のみ Git に入れる)
 ```
@@ -71,7 +71,7 @@ seed/              投入するデータ(sample.csv のみ Git に入れる)
 | 判断 | 理由 |
 |---|---|
 | Supabase は素の Postgres として使い、Drizzle で接続する | Slice 2 で OCI の VM 上の Postgres に移すとき、接続文字列を変えるだけで済むようにする |
-| 認証はパスワード1つ(環境変数に置き、middleware で確認して Cookie に保存) | 評価が世帯で1つなので、ユーザーを区別する必要がない。共有するときはパスワードを渡すだけで済む |
+| 認証はパスワード1つ(環境変数に置き、proxy(旧 middleware)で確認して Cookie に保存) | 評価が世帯で1つなので、ユーザーを区別する必要がない。共有するときはパスワードを渡すだけで済む |
 | 推薦はルールによる点数付けで行う | 結果を毎回同じにでき、テストを先に書ける。LLM は Slice 2 で説明と並べ替えに使う |
 | OCI の Autonomous Database は使わない | Drizzle が Oracle に対応していない。Always Free では7日間使わないと自動で停止する |
 

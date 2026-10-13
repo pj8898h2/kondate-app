@@ -1507,7 +1507,7 @@ gh pr create --fill --body "Closes #8
 ### Task 7: 料理画面と初期データの一括投入(Issue #9)
 
 **Files:**
-- Create: `src/app/dishes/page.tsx`, `src/app/dishes/new/page.tsx`, `src/app/dishes/[id]/page.tsx`, `src/app/dishes/dish-form.tsx`, `src/app/dishes/actions.ts`, `scripts/seed.ts`
+- Create: `src/app/dishes/page.tsx`, `src/app/dishes/new/page.tsx`, `src/app/dishes/[id]/page.tsx`, `src/app/dishes/dish-form.tsx`, `src/app/dishes/actions.ts`, `scripts/seed.ts`, `src/app/error.tsx`
 - Modify: `src/app/layout.tsx`(下部ナビ)
 
 **Interfaces:**
@@ -1715,6 +1715,27 @@ export default async function EditDishPage({ params }: { params: Promise<{ id: s
   );
 }
 ```
+
+- [ ] **Step 5b: 読み込みに失敗したときの画面を書く**(spec §8。DB につながらないときなどに、標準の英語のエラーではなく再読み込みを促す。2026-10-13 本人決定)
+
+`src/app/error.tsx`:
+
+```tsx
+'use client';
+
+export default function ErrorPage() {
+  return (
+    <main className="mx-auto max-w-md space-y-3 p-4">
+      <p>読み込めませんでした。通信の状態を確かめて、もう一度試してください。</p>
+      <button onClick={() => window.location.reload()} className="w-full rounded bg-orange-500 p-3 text-white">
+        もう一度読み込む
+      </button>
+    </main>
+  );
+}
+```
+
+(`reset` ではなくページの再読み込みにするのは、サーバー側で起きた DB のエラーは画面の再描画だけでは直らないため)
 
 - [ ] **Step 6: 一括投入スクリプトを書く**
 
@@ -2237,6 +2258,6 @@ group by 1 order by 1;
 ## Self-Review メモ(計画作成時に確認済み)
 
 - spec のカバー範囲(§3 Slice 1): 料理の登録・編集・一覧 = Task 7 / 一括投入 = Task 4・7 / 献立生成 = Task 2・3・8 / 差し替え・確定 = Task 3・8 / 評価 = Task 9 / パスワード = Task 6 / 公開・CI・PWA = Task 1・10
-- §8 エラー処理: 入力チェック = Task 4・7 / パスワード違い = Task 6 / 料理が足りない = Task 3・8。DB 接続エラーは Next.js 既定のエラー画面に任せる(専用の `error.tsx` は作らない)
+- §8 エラー処理: 入力チェック = Task 4・7 / パスワード違い = Task 6 / 料理が足りない = Task 3・8。DB 接続エラー = Task 7 Step 5b の `error.tsx`(2026-10-13 に追加。当初は作らない計画だったが、spec §8 に合わせた)
 - §1 成功の基準: 測り方 = Task 10 Step 8(2026-10-13 に追加。当初の計画では漏れていた)
 - spec からの変更点(Task 2 Step 9 と Task 9 Step 6 で spec に反映する): `dishes.baseTaste` の追加 / `rerollDay` の `skip` / 「次の日曜日」は今日が日曜なら今日 / 今週の表示は2日前から
